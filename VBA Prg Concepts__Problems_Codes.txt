@@ -1,0 +1,426 @@
+'VBA Programming Concepts - Questions & Solutions:
+------------------------------------------------------
+
+'Problem 1:
+'Write a program to reverse any three digit number and after that check whether they are equal or not.
+    '[HINT: StrReverse]
+
+Sub reverse_num()
+Dim num As Integer, final As Integer
+num = InputBox("Enter the 3 Digit Number")
+final = StrReverse(num)
+MsgBox final
+If num = final Then
+    MsgBox "Two numbers are Equal"
+Else
+    MsgBox "Two numbers are Not Equal"
+End Sub
+
+------------------------------------------------------
+
+'Problem 2:
+'If three sides of a triangle are entered through the keyboard. Write a program to check whether the triangle Is isosceles, equilateral or scalene triangle.
+    '[HINTS: If s1, s2, s3 are three sides of a triangle, then:
+        '– SCALENE S1<>S2<>S3
+        '– ISOSCELES S1=S2, S2<>S3
+        '– EQUILATERAL S1=S3=S2]
+
+Sub Triangle_Type()
+Dim s1 As Integer, s2 As Integer, s3 As Integer
+s1 = InputBox("Enter the side 1 measure")
+s2 = InputBox("Enter the side 2 measure")
+s3 = InputBox("Enter the side 3 measure")
+If s1 <> s2 And s2 <> s3 Then
+    MsgBox "The Triangle is SCALENE"
+ElseIf s1 = s2 And s2 <> s3 Then
+    MsgBox "The triangle is ISOSCELES"
+ElseIf s1 = s2 And s2 = s3 Then
+    MsgBox "The Triangle is EQUILATERAL"
+End If
+End Sub
+
+------------------------------------------------------
+
+'Problem 3:
+'Write a program to find the greatest number out of the three numbers entered through the keyboard using IF.
+
+Sub Greatest_num()
+Dim x1 As Integer, x2 As Integer, x3 As Integer
+x1 = InputBox("Enter the First number")
+x2 = InputBox("Enter the Second number")
+x3 = InputBox("Enter the Third number")
+If x1 > x2 Then
+    If x1 > x3 Then
+        MsgBox "The greatest number is : " & x1
+    Else
+        MsgBox "The greatest number is : " & x3
+    End If
+ElseIf x2 > x3 Then
+    MsgBox "The greatest number is : " & x2
+Else
+    MsgBox "The Greatest number is : " & x3
+End If
+End Sub
+
+------------------------------------------------------
+
+'Problem 4:
+'Write a program that can calculate the wind chill index.
+    '[The wind chill index (WCI) is calculated from the wind speed v in miles per hour and the temperature t in Fahrenheit]
+    '[Three formulas are used, depending on the wind speed:
+        '– if (0 <= v <= 4) then WCI = t
+        '– if (v >=45) then WCI = 1.6t - 55
+        '– otherwise, WCI = 91.4 + (91.4 - t)(0.0203v - 0.304(v)1/2 - 0.474)]
+
+Sub Wind_chill_index()
+Dim v As Single, t As Single
+v = InputBox("Enter the wind speed (v) in miles/hr")
+t = InputBox("Enter the temperature (t) in Farenheit")
+If v >= 0 And v <= 4 Then
+    MsgBox "The WCI is : " & t
+ElseIf v >= 45 Then
+   MsgBox "The WCI is : " & (1.6 * t - 55)
+Else
+   MsgBox "The WCI is : " & (91.4 + ((91.4 - t) * ((0.0203 * v) - (0.304 * (v) ^ 0.5) - 0.474)))
+End If
+End Sub
+
+------------------------------------------------------
+
+'Problem 5:
+'Calculate the factorial of any given number.
+    '[HINTS: Factorial of 5= 5*4*3*2*1; Factorial of 6= 6*5*4*3*2*1]
+
+Sub factorial()
+Dim num As Integer, Facto As Integer, i As Integer
+num = InputBox("Enter the number")
+Facto = 1
+For i = 1 To num    	'i = num To 1 STEP -1
+    Facto = Facto * i
+Next i
+MsgBox "The factorial of " & num & " is : " & Facto
+End Sub
+
+------------------------------------------------------
+
+'Problem 6:
+'Write a program to enter a text and calculate the number of vowels, consonants and spaces.
+    '[E.g. Word is ‘Professional’ - Vowel = 5, consonants = 7]
+
+Sub text_char()
+Dim txt As String, i As Integer, vowels_count As Byte, conso_count As Byte, space_count As Byte, Char As String
+txt = InputBox("Enter a text")
+For i = 1 To Len(txt)
+Char = UCase(Mid(txt, i, 1))
+Select Case Char
+    Case "A", "E", "I", "O", "U"
+        vowels_count = vowels_count + 1
+    Case " "
+        space_count = space_count + 1
+End Select
+Next i
+MsgBox "The number of Vowels in the given text is : " & vowels_count
+MsgBox "The number of Consonants in the given text is : " & Len(txt) - vowels_count - space_count
+MsgBox "The number of Spaces in the given text is : " & space_count
+End Sub
+---------------------------------------------
+
+'Problem 7:
+'Find the numbers between 1 to 500 which follow Armstrong rule below.
+    '[HINTS: for example 153 coz. 1*1*1+5*5*5+3*3*3= 153]
+
+Sub Armstrong()
+    Dim i As Integer, x As Integer, y As Integer, num As Integer, final As String
+        For num = 1 To 500
+            L = Len(CStr(num))
+            y = 0
+                For i = 1 To L
+                    x = Mid(CStr(num), i, 1)
+                    y = y + (x) ^ L         '/or/ Mid(CStr(num), i, 1) ^ x
+                Next i
+                  If y = num Then
+                    final = final & num & vbNewLine
+                  End If
+        Next num
+    MsgBox final
+End Sub
+---------------------------------------------
+
+'Problem 8:
+'Program to generate Fibonacci series upto n value.
+  'Fibonacci series is a series in which each number is the sum of the last two preceding numbers.
+    'The first two terms of a Fibonacci series are 0 and 1
+
+Sub fibonacci()
+    Dim i As Integer, n As Integer, x As Integer, y As Integer, z As Integer, final As String
+    n = InputBox("Enter the number of terms")
+    x = 0
+    y = 1
+    z = 0
+        For i = 1 To n
+            x = y
+            y = z
+            z = x + y
+            final = final & "," & z
+        Next i
+    MsgBox "The list of first " & n & " terms in the Fibonacci Sequence is: " & vbCrLf & "0" & final
+End Sub
+
+'//OR//
+
+Sub Fibonacci_series()
+    Dim i As Integer, n As Integer, x As Byte, y As Byte, z As Integer, total As String
+        x = 0
+        y = 1
+        n = InputBox("Enter number of terms")
+            For i = 1 To n - 2
+                z = x + y
+                total = total & "," & z
+                x = y
+                y = z
+            Next i
+     MsgBox "Fibonacci Series :- " & "0" & "," & "1" & total
+End Sub
+---------------------------------------------
+
+'Problem 9:
+'Program to find the maximum number of handshakes.
+  'Given a positive integer n, find out the total number of handshakes possible.
+  
+  '#NOTE: Formula for handshakes of n people = n*(n-1)/2 = (n-1)+(n-2)+(n-3)+....
+
+Sub handshakes()
+    Dim n As Integer, i As Integer
+    n = InputBox("Enter the number of people")
+        For i = 1 To n - 1      '#{For i = n-1 to 1 Step -1}
+            total = total + i
+        Next i
+    MsgBox "Total number of handshakes between " & n & " nos. of people would be: " & total
+End Sub
+
+'//OR//
+
+Sub Handshakes_count()
+    Dim x As Integer, n As Integer
+        n = InputBox("Enter number of people")
+        x = (n) * (n - 1) / 2
+    MsgBox "Handshakes in " & n & " people = " & x
+End Sub
+---------------------------------------------
+
+'Problem 10:
+'Program to find the number of days in a given month of a given year.
+  'The month and year are given as input, the number of days in that month is displayed as output.
+    
+    '#NOTE: Designating months in numeric format, e.g. January as 1 and so on
+    
+Sub Days_month_year()
+    Dim m As Byte, y As Integer
+    m = InputBox("Enter the month")
+    y = InputBox("Enter the Year")
+        If (m = 4) Or (m = 6) Or (m = 9) Or (m = 11) Then
+            MsgBox "Number of days is: " & 30
+        ElseIf (((y Mod 4 = 0) And (y Mod 100 <> 0)) Or (y Mod 400 = 0)) And (m = 2) Then
+            MsgBox "Number of days is: " & 29
+        ElseIf (m = 2) Then
+            MsgBox "Number of days is: " & 28
+        Else
+            MsgBox "Number of days is: " & 31
+        End If
+End Sub
+
+'//OR//
+
+Sub Days_month_year_1()
+    Dim m As Byte, y As Integer
+    m = InputBox("Enter the month")
+    y = InputBox("Enter the Year")
+        If (((y Mod 4 = 0) And (y Mod 100 <> 0)) Or (y Mod 400 = 0)) And (m = 2) Then
+            MsgBox "Number of days is: " & 29
+        Else
+            Select Case m
+                Case 4, 6, 9, 11
+                    MsgBox "Number of days is: " & 30
+                Case 2
+                    MsgBox "Number of days is: " & 28
+                Case Else
+                    MsgBox "Number of days is: " & 31
+            End Select
+        End If
+End Sub
+---------------------------------------------
+
+'Problem 11:
+'Program to print pyramid pattern using stars or Pyramid star patterns.
+  'For any given number n, Print various pyramid star patterns.
+
+Sub pyramid_star()
+    Dim i As Integer, j As Integer, n As Byte, S As String
+    n = InputBox("Enter the number of rows")
+        For i = 1 To n
+            For j = 1 To i
+                S = S & "*"
+            Next j
+            S = S & vbCrLf
+        Next i
+    MsgBox S
+End Sub
+
+'//OR//
+
+Sub pyr_star_Pattern()
+    Dim i As Integer, total As String, S As String, z As String, n As Byte
+        n = InputBox("Enter the number of rows")
+        For i = 1 To n
+            total = total & "*"
+            z = total & vbNewLine
+            S = S & z
+        Next i
+    MsgBox S
+End Sub
+---------------------------------------------
+
+'Problem 12:
+'Program to print palindrome pyramid Pattern using numbers.
+  'Given a number n, the task is to print a palindrome pyramid containing n number of rows. [Input: 5 number of rows]
+
+Sub palindrome_pyr()
+    Dim i As Integer, j As Integer, k As Integer, n As Byte, S As String
+    n = InputBox("Enter the number of rows")
+        For i = 1 To n
+            For j = 1 To i
+                S = S & j
+            Next j
+            For k = i - 1 To 1 Step -1
+                S = S & k
+            Next k
+            S = S & vbCrLf
+        Next i
+    MsgBox S
+End Sub
+
+'//OR//
+
+Sub Palindrome_Pyramid()
+    Dim i As Integer, n As Integer, total As String, S As String, z As String
+        n = InputBox("Enter number of rows")
+        For i = 1 To n
+            total = Left(total, i - 1) & i & StrReverse(Left(total, i - 1))
+            z = total & vbNewLine
+            S = S & z
+        Next i
+        MsgBox S
+End Sub
+---------------------------------------------
+
+'Problem 13:
+'Programs for diamond Pattern printing using numbers. [Input: 3 4]
+
+Sub diamond_num()
+    Dim i As Integer, j As Integer, n As Byte, S As String
+    n = InputBox("Enter the number of rows")
+        For i = 1 To n
+            For j = 1 To i
+                S = S & (i + 2)
+            Next j
+            S = S & vbCrLf
+        Next i
+        For i = n - 1 To 1 Step -1
+            For j = 1 To i
+                S = S & (i + 2)
+            Next j
+            S = S & vbCrLf
+        Next i
+    MsgBox S
+End Sub
+
+'//OR//
+
+Sub diamond_pattern()
+    Dim i As Integer, j As Integer, n As Byte, x As Byte, S As String
+    x = InputBox("Enter the start digit")
+    n = InputBox("Enter the number of rows")
+    S = x & vbCrLf
+        For i = 1 To n - 1
+            For j = 1 To i + 1
+                S = S & (x + i)
+            Next j
+            S = S & vbCrLf
+        Next i
+        For i = 1 To n - 1
+            For j = n - 1 To i Step -1
+                S = S & (x + n - 1 - i)
+            Next j
+            S = S & vbCrLf
+        Next i
+    MsgBox S
+End Sub
+
+'//OR//
+
+Sub DiamondPattern()
+    Dim i As Integer, n As Integer, x As Integer, z As Double, total As String, S As String, y As Integer
+        x = InputBox("Enter number less than 7", , 3)
+        n = InputBox("Enter number of rows greater than chosen number")
+            y = n - 1
+                For i = 0 To n - 1
+                    z = z + 10 ^ i
+                    total = total & i + y
+                    total = total + z
+                    S = S & total & vbNewLine
+                Next i
+        MsgBox Mid(S, 1, Len(S) - Len(total) - 4) & StrReverse(S)
+End Sub
+---------------------------------------------
+
+'Problem 14:
+'Capitalizing the first and the last letter of each word in a Line.
+
+Sub Caps_letter()
+    Dim txt As String, txt1 As String
+    txt = InputBox("Enter the line")
+    txt1 = StrConv(txt, vbProperCase)
+    ' Mid(txt, 1, 1) = UCase(Mid(txt, 1, 1))
+    ' Mid(txt, Len(txt), 1) = UCase(Mid(txt, Len(txt), 1))
+    Mid(txt1, Len(txt1), 1) = UCase(Mid(txt1, Len(txt1), 1))
+        'For i = 1 To Len(txt)
+            ' If Mid(txt, i, 1) = " " Then
+                ' Mid(txt, i - 1, 1) = UCase(Mid(txt, i - 1, 1))
+                ' Mid(txt, i + 1, 1) = UCase(Mid(txt, i + 1, 1))
+            For i = 1 To Len(txt1)
+                If Mid(txt1, i, 1) = " " Then
+                Mid(txt1, i - 1, 1) = UCase(Mid(txt1, i - 1, 1))
+            End If
+        Next i
+    MsgBox txt1
+End Sub
+---------------------------------------------
+
+'Problem 15:
+'Program to find the frequency of characters in a string.
+  'Input should be of text as well as character whose freq is to be calculated.
+    '[Example – Google , Freq of g in this is 2]
+
+Sub char_freq()
+    Dim txt As String, count As Integer, char As String
+        txt = InputBox("Enter the text")
+        char = InputBox("Enter the target character")
+        count = Len(LCase(txt)) - Len(Replace(LCase(txt), char, ""))
+        MsgBox "The freq of '" & char & "' in the given text is: " & count
+End Sub
+
+'//OR//
+
+Sub freq_char()
+    Dim i As Integer, txt As String, char As String, count As Integer
+        txt = InputBox("Enter the string")
+        char = InputBox("Enter the character to be counted")
+            For i = 1 To Len(txt)
+                If LCase(Mid(txt, i, 1)) = LCase(char) Then
+                    count = count + 1
+                End If
+            Next i
+            MsgBox "Frequency of " & char & " = " & count
+End Sub
+---------------------------------------------
+

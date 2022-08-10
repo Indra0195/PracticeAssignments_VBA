@@ -1,0 +1,43 @@
+'VBA Objects Programming - Questions & Solutions:
+--------------------------------------------------
+
+'Problem 1:
+'Write a program such that you activate the sheet in the workbook which the user wants.
+
+Sub activate_sheet_wkb()
+
+    Dim wkb As Workbook
+    Dim sht As Worksheet
+    Dim wkb_name As String
+    Dim sht_name As String
+    
+    wkb_name = InputBox("Enter the Workbook file path name")
+    sht_name = InputBox("Enter the sheet name")
+        
+    Set wkb = Workbooks.Open(Filename:=wkb_name)
+    Set sht = wkb.Worksheets(sht_name)
+    
+    sht.Activate
+        
+End Sub
+------------------------------------------------
+
+'Problem 2:
+'Write a program such that you add two worksheets after second sheet.
+  'Also, rename all the worksheets by appending your initials after the basic name.
+     '[Eg. Sheet1 will become Sheet1_EA; Sheet2 will become Sheet2_EA and so on]
+
+Sub add_rename_sheets()
+
+    Dim i As Integer, newname As String
+    
+    'Worksheets.Add After:=Worksheets(1), Count:=1 (for adding the second sheet)
+    Worksheets.Add After:=Worksheets(2), Count:=2
+    
+    newname = InputBox("Enter the initials to rename all sheets", , "_IR")
+        For i = 1 To Sheets.Count
+            Sheets(i).name = "Sheet" & i & newname
+        Next
+        
+End Sub
+------------------------------------------------
